@@ -2,290 +2,495 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base body styles */
-body {
-  @apply bg-zinc-900 transition-colors duration-300;
-}
+/* ===================================
+   BASE STYLES
+   =================================== */
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Selection colors - Cognivue gold */
+body {
+  @apply bg-light-bg text-light-text;
+  @apply transition-colors duration-300 ease-in-out;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+.dark body {
+  @apply bg-dark-bg text-dark-text;
+}
+
+/* Selection */
 ::selection {
-  @apply bg-cognivue-gold text-black;
+  @apply bg-accent-navy text-white;
 }
 
-::-moz-selection {
-  @apply bg-cognivue-gold text-black;
-}
-
-/* Dark mode selection */
 .dark ::selection {
-  @apply bg-cognivue-blue-light text-white;
+  @apply bg-accent-blue text-white;
 }
 
-.dark ::-moz-selection {
-  @apply bg-cognivue-blue-light text-white;
-}
+/* ===================================
+   FONT DEFINITIONS
+   =================================== */
 
-/* Font definitions */
 @font-face {
   font-family: "OldLondon";
   src: url("./assets/fonts/OldLondon.ttf");
+  font-display: swap;
 }
+
 @font-face {
   font-family: "TimesNewRoman";
   src: url("./assets/fonts/times-new-roman.ttf");
+  font-display: swap;
 }
+
 @font-face {
   font-family: "Impact";
   src: url("./assets/fonts/impact.ttf");
+  font-display: swap;
 }
+
 @font-face {
   font-family: "Canopee";
   src: url("./assets/fonts/Canopee-regular.otf");
+  font-display: swap;
 }
+
 @font-face {
   font-family: "EditorialNew";
   src: url("./assets/fonts/PPEditorialNew-Regular-BF644b214ff145f.otf");
+  font-display: swap;
 }
+
 @font-face {
   font-family: "Helvetica";
   src: url("./assets/fonts/Helvetica.ttf");
+  font-display: swap;
 }
+
 @font-face {
   font-family: "Arial";
   src: url("./assets/fonts/ARIAL.TTF");
+  font-display: swap;
 }
 
-/* Hide scrollbar */
+/* ===================================
+   SCROLLBAR (Minimal)
+   =================================== */
+
 ::-webkit-scrollbar {
-  display: none;
+  width: 8px;
+  height: 8px;
 }
 
-/* Image selection prevention */
-img {
-  @apply select-none;
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
 }
 
-/* Main screen container - Light mode */
+::-webkit-scrollbar-thumb {
+  @apply bg-light-border rounded-full;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-dark-border;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-light-secondary;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  @apply bg-dark-secondary;
+}
+
+/* ===================================
+   MAIN LAYOUT
+   =================================== */
+
 .screen {
-  @apply bg-[url('/bg/texture.jpg')] md:max-w-[1536px] md:w-full w-[1400px] mx-auto font-EditorialNew px-4 pt-4 min-h-screen;
-  @apply text-light-text transition-all duration-300;
+  @apply bg-light-bg min-h-screen;
+  @apply max-w-6xl mx-auto px-6 md:px-12 py-8;
+  @apply transition-colors duration-300;
 }
 
-/* Main screen container - Dark mode */
 .dark .screen {
-  @apply bg-dark-bg text-dark-text;
-  background-image: url('/bg/texture.jpg');
-  background-blend-mode: overlay;
-  background-color: #0f172a;
+  @apply bg-dark-bg;
 }
 
-/* Marquee container */
-.marquee-container {
-  overflow: hidden;
-  white-space: nowrap;
-  width: 100%;
-  font-size: 90px;
-  margin-top: 20px;
-  font-family: "TimesNewRoman";
-  @apply border-y-2 border-light-border;
+/* ===================================
+   TYPOGRAPHY
+   =================================== */
+
+h1, h2, h3, h4 {
+  @apply font-TimesNewRoman text-light-text;
+  @apply leading-tight tracking-tight;
 }
 
-.dark .marquee-container {
-  @apply border-dark-border;
+.dark h1, .dark h2, .dark h3, .dark h4 {
+  @apply text-dark-text;
 }
 
-.marquee {
-  animation: marquee 15s linear infinite;
-  @apply font-medium;
-}
-
-.marquee:hover {
-  animation-play-state: paused;
-}
-
-.marquee a {
-  text-decoration: none;
-  @apply px-3 py-1 cursor-pointer transition-colors duration-300;
-  @apply bg-cognivue-blue text-white hover:bg-cognivue-blue-light;
-}
-
-.dark .marquee a {
-  @apply bg-dark-surface text-dark-text hover:bg-cognivue-blue;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-/* Drop cap styling */
-.high {
-  float: left;
-  margin-right: 10px;
-  font-weight: bold;
-  @apply px-4 text-7xl font-bold font-TimesNewRoman;
-  @apply bg-cognivue-blue text-white;
-}
-
-.dark .high {
-  @apply bg-cognivue-blue-light text-white;
-}
-
-/* Headlines */
 h1 {
-  @apply text-start font-bold font-TimesNewRoman;
+  @apply text-4xl md:text-5xl font-bold;
 }
 
-/* Divider lines */
-.divider-thick {
-  @apply border-t-[5px] border-light-border/85;
+h2 {
+  @apply text-2xl md:text-3xl font-semibold;
 }
 
-.divider-thin {
-  @apply border-t-[2px] border-light-border/90;
+h3 {
+  @apply text-xl md:text-2xl font-medium;
 }
 
-.dark .divider-thick {
+p {
+  @apply leading-relaxed max-w-reading;
+}
+
+/* ===================================
+   NEWSPAPER ELEMENTS
+   =================================== */
+
+/* Elegant divider with dot */
+.divider-ornament {
+  @apply flex items-center justify-center gap-4 my-8;
+}
+
+.divider-ornament::before,
+.divider-ornament::after {
+  content: "";
+  @apply flex-1 h-px bg-light-border;
+}
+
+.dark .divider-ornament::before,
+.dark .divider-ornament::after {
+  @apply bg-dark-border;
+}
+
+.divider-ornament span {
+  @apply text-light-muted text-lg;
+}
+
+.dark .divider-ornament span {
+  @apply text-dark-muted;
+}
+
+/* Simple horizontal rule */
+.divider {
+  @apply border-t border-light-border my-6;
+}
+
+.dark .divider {
   @apply border-dark-border;
 }
 
-.dark .divider-thin {
-  @apply border-dark-border/80;
+/* Section header with rule */
+.section-header {
+  @apply uppercase tracking-widest text-xs font-Helvetica font-semibold;
+  @apply text-light-secondary mb-4 pb-2;
+  @apply border-b border-light-divider;
 }
 
-/* Region card styling */
+.dark .section-header {
+  @apply text-dark-secondary border-dark-divider;
+}
+
+/* ===================================
+   CARDS
+   =================================== */
+
+.card {
+  @apply bg-light-surface rounded-lg p-6;
+  @apply border border-light-border;
+  @apply shadow-card;
+  @apply transition-all duration-200 ease-out;
+}
+
+.dark .card {
+  @apply bg-dark-surface border-dark-border;
+  @apply shadow-card-dark;
+}
+
+.card:hover {
+  @apply shadow-card-hover -translate-y-0.5;
+  @apply border-accent-navy/30;
+}
+
+.dark .card:hover {
+  @apply shadow-card-dark-hover;
+  @apply border-accent-blue/30;
+}
+
+.card-interactive {
+  @apply cursor-pointer;
+}
+
+.card-interactive:active {
+  @apply scale-[0.99];
+}
+
+/* ===================================
+   REGION CARDS
+   =================================== */
+
 .region-card {
-  @apply border border-light-border/30 p-4 transition-all duration-300;
-  @apply hover:shadow-lg hover:border-cognivue-blue/50;
+  @apply card p-5;
+  @apply border-t-4;
 }
 
-.dark .region-card {
-  @apply border-dark-border bg-dark-surface/50;
-  @apply hover:border-cognivue-blue-light/50;
+.region-card-us {
+  @apply border-t-region-us;
 }
 
-/* Consensus/Divergence boxes */
-.analysis-box {
-  @apply border-2 border-light-border/20 p-4 bg-light-surface/50;
+.region-card-india {
+  @apply border-t-region-india;
 }
 
-.dark .analysis-box {
-  @apply border-dark-border bg-dark-surface/30;
+.region-card-china {
+  @apply border-t-region-china;
 }
 
-.consensus-box {
-  @apply border-l-4 border-l-green-600;
+.region-card-russia {
+  @apply border-t-region-russia;
 }
 
-.divergence-box {
-  @apply border-l-4 border-l-amber-500;
+/* ===================================
+   BUTTONS
+   =================================== */
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2;
+  @apply px-4 py-2.5 rounded-lg font-Helvetica font-medium text-sm;
+  @apply transition-all duration-150 ease-out;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
 }
 
-/* Badge styling */
+.btn-primary {
+  @apply bg-accent-navy text-white;
+  @apply hover:bg-accent-navy-light;
+  @apply focus:ring-accent-navy;
+}
+
+.dark .btn-primary {
+  @apply bg-accent-blue text-white;
+  @apply hover:bg-accent-blue/90;
+  @apply focus:ring-accent-blue;
+}
+
+.btn-secondary {
+  @apply bg-light-surface text-light-text border border-light-border;
+  @apply hover:bg-light-border/20;
+  @apply focus:ring-accent-navy;
+}
+
+.dark .btn-secondary {
+  @apply bg-dark-surface text-dark-text border-dark-border;
+  @apply hover:bg-dark-border/50;
+  @apply focus:ring-accent-blue;
+}
+
+.btn-ghost {
+  @apply text-light-secondary hover:text-light-text;
+  @apply hover:bg-light-border/20;
+}
+
+.dark .btn-ghost {
+  @apply text-dark-secondary hover:text-dark-text;
+  @apply hover:bg-dark-border/50;
+}
+
+/* ===================================
+   INPUTS
+   =================================== */
+
+.input {
+  @apply w-full px-4 py-3 rounded-lg;
+  @apply bg-light-surface border border-light-border;
+  @apply text-light-text placeholder:text-light-muted;
+  @apply font-Helvetica text-base;
+  @apply transition-all duration-150;
+  @apply focus:outline-none focus:border-accent-navy focus:ring-2 focus:ring-accent-navy/20;
+}
+
+.dark .input {
+  @apply bg-dark-surface border-dark-border;
+  @apply text-dark-text placeholder:text-dark-muted;
+  @apply focus:border-accent-blue focus:ring-accent-blue/20;
+}
+
+/* ===================================
+   BADGES / CHIPS
+   =================================== */
+
 .badge {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  @apply inline-flex items-center gap-1.5;
+  @apply px-2.5 py-1 rounded-full;
+  @apply text-xs font-Helvetica font-medium;
 }
 
-.badge-blue {
-  @apply bg-cognivue-blue/10 text-cognivue-blue;
+.badge-default {
+  @apply bg-light-border/50 text-light-secondary;
 }
 
-.dark .badge-blue {
-  @apply bg-cognivue-blue-light/20 text-cognivue-blue-light;
+.dark .badge-default {
+  @apply bg-dark-border text-dark-secondary;
 }
 
-.badge-teal {
-  @apply bg-cognivue-teal/10 text-cognivue-teal;
+.badge-accent {
+  @apply bg-accent-navy/10 text-accent-navy;
 }
 
-.dark .badge-teal {
-  @apply bg-cognivue-teal-light/20 text-cognivue-teal-light;
+.dark .badge-accent {
+  @apply bg-accent-blue/20 text-accent-blue;
 }
 
-/* Theme toggle button */
+.chip {
+  @apply inline-flex items-center gap-1;
+  @apply px-3 py-1.5 rounded-full;
+  @apply text-sm font-Helvetica;
+  @apply bg-light-border/30 text-light-secondary;
+  @apply hover:bg-light-border/50 cursor-pointer;
+  @apply transition-colors duration-150;
+}
+
+.dark .chip {
+  @apply bg-dark-border/50 text-dark-secondary;
+  @apply hover:bg-dark-border;
+}
+
+/* ===================================
+   ANALYSIS BOXES
+   =================================== */
+
+.analysis-box {
+  @apply card p-5;
+  @apply border-l-4;
+}
+
+.analysis-box-consensus {
+  @apply border-l-emerald-500;
+}
+
+.analysis-box-divergence {
+  @apply border-l-amber-500;
+}
+
+/* ===================================
+   LINKS
+   =================================== */
+
+.link {
+  @apply text-accent-navy font-medium;
+  @apply hover:text-accent-navy-light;
+  @apply transition-colors duration-150;
+  @apply underline underline-offset-2 decoration-accent-navy/30;
+  @apply hover:decoration-accent-navy;
+}
+
+.dark .link {
+  @apply text-accent-blue;
+  @apply hover:text-accent-sage;
+  @apply decoration-accent-blue/30;
+  @apply hover:decoration-accent-blue;
+}
+
+.link-subtle {
+  @apply text-light-secondary no-underline;
+  @apply hover:text-light-text;
+}
+
+.dark .link-subtle {
+  @apply text-dark-secondary;
+  @apply hover:text-dark-text;
+}
+
+/* ===================================
+   THEME TOGGLE
+   =================================== */
+
 .theme-toggle {
-  @apply p-2 rounded-full transition-all duration-300;
-  @apply bg-light-border/10 hover:bg-light-border/20;
+  @apply p-2 rounded-lg;
+  @apply text-light-secondary hover:text-light-text;
+  @apply hover:bg-light-border/30;
+  @apply transition-all duration-200;
 }
 
 .dark .theme-toggle {
-  @apply bg-dark-surface hover:bg-dark-border;
+  @apply text-dark-secondary hover:text-dark-text;
+  @apply hover:bg-dark-border/50;
 }
 
-/* Intelligence feed styling */
-.intel-feed {
-  @apply text-sm font-Helvetica;
+.theme-toggle svg {
+  @apply w-5 h-5;
+  @apply transition-transform duration-300;
 }
 
-.intel-feed-item {
-  @apply px-4 py-1 mx-2;
-  @apply border-l-2 border-cognivue-blue;
+.theme-toggle:hover svg {
+  @apply rotate-12;
 }
 
-.dark .intel-feed-item {
-  @apply border-cognivue-blue-light;
-}
+/* ===================================
+   STAGGER ANIMATIONS
+   =================================== */
 
-/* Query showcase */
-.query-showcase {
-  @apply border-2 border-light-border p-6 my-6;
-  @apply bg-gradient-to-r from-transparent via-light-surface/50 to-transparent;
-}
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.15s; }
+.stagger-3 { animation-delay: 0.2s; }
+.stagger-4 { animation-delay: 0.25s; }
+.stagger-5 { animation-delay: 0.3s; }
 
-.dark .query-showcase {
-  @apply border-dark-border;
-  @apply bg-gradient-to-r from-transparent via-dark-surface/30 to-transparent;
-}
+/* ===================================
+   UTILITIES
+   =================================== */
 
-/* Region flags - subtle underline colors */
-.region-us {
-  @apply border-b-2 border-b-blue-600;
-}
-
-.region-india {
-  @apply border-b-2 border-b-orange-500;
-}
-
-.region-china {
-  @apply border-b-2 border-b-red-600;
-}
-
-.region-russia {
-  @apply border-b-2 border-b-red-700;
-}
-
-/* Animated gradient for headers */
-.gradient-text {
-  @apply bg-gradient-to-r from-cognivue-blue via-cognivue-teal to-cognivue-blue;
-  @apply bg-clip-text text-transparent bg-[length:200%_auto];
-  animation: gradient-flow 3s ease-in-out infinite;
-}
-
-@keyframes gradient-flow {
-  0%, 100% {
-    background-position: 0% center;
-  }
-  50% {
-    background-position: 100% center;
-  }
-}
-
-/* Declassified stamp animation */
-.declassified-stamp {
-  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
-  @apply text-red-600/20 text-9xl font-Impact rotate-[-15deg];
-  @apply pointer-events-none select-none;
-}
-
-/* Utility classes */
 .text-balance {
   text-wrap: balance;
+}
+
+.max-w-reading {
+  max-width: 65ch;
+}
+
+/* Region indicator dots */
+.region-dot {
+  @apply w-2 h-2 rounded-full;
+}
+
+.region-dot-us { @apply bg-region-us; }
+.region-dot-india { @apply bg-region-india; }
+.region-dot-china { @apply bg-region-china; }
+.region-dot-russia { @apply bg-region-russia; }
+
+/* Focus visible for accessibility */
+.focus-ring {
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-navy focus-visible:ring-offset-2;
+}
+
+.dark .focus-ring {
+  @apply focus-visible:ring-accent-blue;
+}
+
+/* Prevent image dragging */
+img {
+  @apply select-none pointer-events-none;
+}
+
+/* ===================================
+   RESPONSIVE UTILITIES
+   =================================== */
+
+@media (max-width: 768px) {
+  .screen {
+    @apply px-4 py-6;
+  }
+
+  h1 {
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
 }

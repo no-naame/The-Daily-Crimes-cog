@@ -1,104 +1,60 @@
-import Slider from "./Slider"
-import { IoGlobeSharp } from "react-icons/io5"
-
 const Footer = () => {
   return (
-    <div className="select-none">
-      <Slider />
-
-      {/* Main Footer */}
-      <div className="py-6 border-t-2 border-light-border/20 dark:border-dark-border">
-        {/* Top Row - Branding and Tagline */}
-        <div className="text-center mb-4">
-          <h3 className="font-OldLondon text-3xl text-light-text dark:text-dark-text">
+    <footer className="mt-16 pt-8 border-t border-light-border dark:border-dark-border">
+      {/* Main Footer Content */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+        {/* Branding */}
+        <div className="text-center md:text-left">
+          <h3 className="font-OldLondon text-2xl text-light-text dark:text-dark-text mb-1">
             Cognivue
           </h3>
-          <p className="text-xs font-EditorialNew text-light-muted dark:text-dark-muted italic">
-            "Truth emerges from the intersection of perspectives, not the
-            dominance of one."
+          <p className="text-sm text-light-muted dark:text-dark-muted italic font-serif">
+            Truth through perspective diversity
           </p>
         </div>
 
-        {/* Middle Row - Links */}
-        <div className="flex flex-wrap justify-center gap-4 text-sm font-Helvetica mb-4">
-          <a
-            className="text-light-muted dark:text-dark-muted hover:text-cognivue-blue dark:hover:text-cognivue-blue-light transition-colors duration-300"
-            href="#"
-          >
+        {/* Links */}
+        <nav className="flex flex-wrap justify-center gap-6 text-sm font-Helvetica">
+          <a href="#" className="link-subtle">
             About
           </a>
-          <span className="text-light-border/30 dark:text-dark-border">|</span>
-          <a
-            className="text-light-muted dark:text-dark-muted hover:text-cognivue-blue dark:hover:text-cognivue-blue-light transition-colors duration-300"
-            href="#"
-          >
+          <a href="#" className="link-subtle">
             Methodology
           </a>
-          <span className="text-light-border/30 dark:text-dark-border">|</span>
-          <a
-            className="text-light-muted dark:text-dark-muted hover:text-cognivue-blue dark:hover:text-cognivue-blue-light transition-colors duration-300"
-            href="#"
-          >
-            API Access
+          <a href="#" className="link-subtle">
+            API
           </a>
-          <span className="text-light-border/30 dark:text-dark-border">|</span>
-          <a
-            className="text-light-muted dark:text-dark-muted hover:text-cognivue-blue dark:hover:text-cognivue-blue-light transition-colors duration-300"
-            href="#"
-          >
+          <a href="#" className="link-subtle">
             Research
           </a>
-          <span className="text-light-border/30 dark:text-dark-border">|</span>
-          <a
-            className="text-light-muted dark:text-dark-muted hover:text-cognivue-blue dark:hover:text-cognivue-blue-light transition-colors duration-300"
-            href="#"
-          >
-            Contact
-          </a>
-        </div>
+        </nav>
 
-        {/* Bottom Row - Copyright and Data Info */}
-        <div className="flex flex-wrap justify-between items-center px-6 text-xs font-Helvetica">
-          <div className="flex items-center gap-2 text-light-muted dark:text-dark-muted">
-            <IoGlobeSharp className="text-cognivue-blue dark:text-cognivue-blue-light" />
-            <span>
-              Sources from{" "}
-              <strong className="text-light-text dark:text-dark-text">
-                4 regions
-              </strong>
-              ,{" "}
-              <strong className="text-light-text dark:text-dark-text">
-                4 languages
-              </strong>
-            </span>
-          </div>
-
-          <div className="text-light-muted dark:text-dark-muted">
-            Cognivue © {new Date().getFullYear()} | Multi-Regional Geopolitical
-            Intelligence
-          </div>
-
-          <div className="flex gap-3">
-            <a
-              className="text-light-muted dark:text-dark-muted hover:text-cognivue-blue dark:hover:text-cognivue-blue-light transition-colors duration-300"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://github.com"
-            >
-              GitHub
-            </a>
-            <a
-              className="text-light-muted dark:text-dark-muted hover:text-cognivue-blue dark:hover:text-cognivue-blue-light transition-colors duration-300"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://twitter.com"
-            >
-              Twitter
-            </a>
-          </div>
+        {/* Region Indicators */}
+        <div className="flex items-center gap-4 text-xs font-Helvetica text-light-muted dark:text-dark-muted">
+          <span className="flex items-center gap-1.5">
+            <span className="region-dot region-dot-us"></span>
+            US
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="region-dot region-dot-india"></span>
+            IN
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="region-dot region-dot-china"></span>
+            CN
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="region-dot region-dot-russia"></span>
+            RU
+          </span>
         </div>
       </div>
-    </div>
+
+      {/* Copyright */}
+      <div className="text-center text-xs text-light-muted dark:text-dark-muted font-Helvetica pb-8">
+        © {new Date().getFullYear()} Cognivue. Multi-regional geopolitical intelligence.
+      </div>
+    </footer>
   )
 }
 
