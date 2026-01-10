@@ -1,10 +1,11 @@
 import Home from "./Pages/Home"
+import { ThemeProvider } from "./contexts/ThemeContext"
 
 function App() {
   return (
-    <>
+    <ThemeProvider>
       <Home />
-    </>
+    </ThemeProvider>
   )
 }
 

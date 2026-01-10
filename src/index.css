@@ -2,23 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base body styles */
 body {
-  @apply bg-zinc-900;
+  @apply bg-zinc-900 transition-colors duration-300;
 }
+
 html {
   scroll-behavior: smooth;
 }
 
+/* Selection colors - Cognivue gold */
 ::selection {
-  background: #fdff32;
-  color: #000;
+  @apply bg-cognivue-gold text-black;
 }
 
-/* For better cross-browser support */
 ::-moz-selection {
-  background: #fdff32;
-  color: #000;
+  @apply bg-cognivue-gold text-black;
 }
+
+/* Dark mode selection */
+.dark ::selection {
+  @apply bg-cognivue-blue-light text-white;
+}
+
+.dark ::-moz-selection {
+  @apply bg-cognivue-blue-light text-white;
+}
+
+/* Font definitions */
 @font-face {
   font-family: "OldLondon";
   src: url("./assets/fonts/OldLondon.ttf");
@@ -48,29 +59,47 @@ html {
   src: url("./assets/fonts/ARIAL.TTF");
 }
 
-/* #c3bcb2 */
+/* Hide scrollbar */
 ::-webkit-scrollbar {
   display: none;
 }
 
+/* Image selection prevention */
 img {
   @apply select-none;
 }
 
+/* Main screen container - Light mode */
+.screen {
+  @apply bg-[url('/bg/texture.jpg')] md:max-w-[1536px] md:w-full w-[1400px] mx-auto font-EditorialNew px-4 pt-4 min-h-screen;
+  @apply text-light-text transition-all duration-300;
+}
+
+/* Main screen container - Dark mode */
+.dark .screen {
+  @apply bg-dark-bg text-dark-text;
+  background-image: url('/bg/texture.jpg');
+  background-blend-mode: overlay;
+  background-color: #0f172a;
+}
+
+/* Marquee container */
 .marquee-container {
   overflow: hidden;
   white-space: nowrap;
   width: 100%;
   font-size: 90px;
-  border-top: 2px solid #1b1b1b;
-  border-bottom: 2px solid #1b1b1b;
   margin-top: 20px;
-
   font-family: "TimesNewRoman";
+  @apply border-y-2 border-light-border;
+}
+
+.dark .marquee-container {
+  @apply border-dark-border;
 }
 
 .marquee {
-  animation: marquee 10s linear infinite;
+  animation: marquee 15s linear infinite;
   @apply font-medium;
 }
 
@@ -80,9 +109,12 @@ img {
 
 .marquee a {
   text-decoration: none;
-  background: #000;
-  @apply px-3 py-1 cursor-pointer hover:bg-zinc-800 transition-colors duration-300;
-  color: #d3cfc6;
+  @apply px-3 py-1 cursor-pointer transition-colors duration-300;
+  @apply bg-cognivue-blue text-white hover:bg-cognivue-blue-light;
+}
+
+.dark .marquee a {
+  @apply bg-dark-surface text-dark-text hover:bg-cognivue-blue;
 }
 
 @keyframes marquee {
@@ -94,19 +126,166 @@ img {
   }
 }
 
+/* Drop cap styling */
 .high {
   float: left;
   margin-right: 10px;
   font-weight: bold;
-  background: #222222;
-  color: #d3cfc6;
   @apply px-4 text-7xl font-bold font-TimesNewRoman;
+  @apply bg-cognivue-blue text-white;
 }
 
+.dark .high {
+  @apply bg-cognivue-blue-light text-white;
+}
+
+/* Headlines */
 h1 {
   @apply text-start font-bold font-TimesNewRoman;
 }
 
-.screen {
-  @apply bg-[url('../public/bg/texture.jpg')] md:max-w-[1536px]  md:w-full w-[1400px] mx-auto font-EditorialNew px-4 pt-4 min-h-screen text-zinc-800;
+/* Divider lines */
+.divider-thick {
+  @apply border-t-[5px] border-light-border/85;
+}
+
+.divider-thin {
+  @apply border-t-[2px] border-light-border/90;
+}
+
+.dark .divider-thick {
+  @apply border-dark-border;
+}
+
+.dark .divider-thin {
+  @apply border-dark-border/80;
+}
+
+/* Region card styling */
+.region-card {
+  @apply border border-light-border/30 p-4 transition-all duration-300;
+  @apply hover:shadow-lg hover:border-cognivue-blue/50;
+}
+
+.dark .region-card {
+  @apply border-dark-border bg-dark-surface/50;
+  @apply hover:border-cognivue-blue-light/50;
+}
+
+/* Consensus/Divergence boxes */
+.analysis-box {
+  @apply border-2 border-light-border/20 p-4 bg-light-surface/50;
+}
+
+.dark .analysis-box {
+  @apply border-dark-border bg-dark-surface/30;
+}
+
+.consensus-box {
+  @apply border-l-4 border-l-green-600;
+}
+
+.divergence-box {
+  @apply border-l-4 border-l-amber-500;
+}
+
+/* Badge styling */
+.badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.badge-blue {
+  @apply bg-cognivue-blue/10 text-cognivue-blue;
+}
+
+.dark .badge-blue {
+  @apply bg-cognivue-blue-light/20 text-cognivue-blue-light;
+}
+
+.badge-teal {
+  @apply bg-cognivue-teal/10 text-cognivue-teal;
+}
+
+.dark .badge-teal {
+  @apply bg-cognivue-teal-light/20 text-cognivue-teal-light;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  @apply p-2 rounded-full transition-all duration-300;
+  @apply bg-light-border/10 hover:bg-light-border/20;
+}
+
+.dark .theme-toggle {
+  @apply bg-dark-surface hover:bg-dark-border;
+}
+
+/* Intelligence feed styling */
+.intel-feed {
+  @apply text-sm font-Helvetica;
+}
+
+.intel-feed-item {
+  @apply px-4 py-1 mx-2;
+  @apply border-l-2 border-cognivue-blue;
+}
+
+.dark .intel-feed-item {
+  @apply border-cognivue-blue-light;
+}
+
+/* Query showcase */
+.query-showcase {
+  @apply border-2 border-light-border p-6 my-6;
+  @apply bg-gradient-to-r from-transparent via-light-surface/50 to-transparent;
+}
+
+.dark .query-showcase {
+  @apply border-dark-border;
+  @apply bg-gradient-to-r from-transparent via-dark-surface/30 to-transparent;
+}
+
+/* Region flags - subtle underline colors */
+.region-us {
+  @apply border-b-2 border-b-blue-600;
+}
+
+.region-india {
+  @apply border-b-2 border-b-orange-500;
+}
+
+.region-china {
+  @apply border-b-2 border-b-red-600;
+}
+
+.region-russia {
+  @apply border-b-2 border-b-red-700;
+}
+
+/* Animated gradient for headers */
+.gradient-text {
+  @apply bg-gradient-to-r from-cognivue-blue via-cognivue-teal to-cognivue-blue;
+  @apply bg-clip-text text-transparent bg-[length:200%_auto];
+  animation: gradient-flow 3s ease-in-out infinite;
+}
+
+@keyframes gradient-flow {
+  0%, 100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+/* Declassified stamp animation */
+.declassified-stamp {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  @apply text-red-600/20 text-9xl font-Impact rotate-[-15deg];
+  @apply pointer-events-none select-none;
+}
+
+/* Utility classes */
+.text-balance {
+  text-wrap: balance;
 }
