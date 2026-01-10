@@ -1,9 +1,15 @@
-import { FaInstagramSquare, FaTwitterSquare } from "react-icons/fa"
-import { FaSquareFacebook } from "react-icons/fa6"
+import { useState, useEffect } from "react"
 import { IoGlobeSharp } from "react-icons/io5"
-import Clock from "../utils/Clock"
+import ThemeToggle from "./ThemeToggle"
 
 const Top = () => {
+  const [times, setTimes] = useState({
+    us: "",
+    india: "",
+    china: "",
+    russia: "",
+  })
+
   const date = new Date()
   const day = date.getDay()
   const month = date.getMonth()
@@ -33,44 +39,99 @@ const Top = () => {
     "November",
     "December",
   ]
+
+  useEffect(() => {
+    const updateTimes = () => {
+      const now = new Date()
+      setTimes({
+        us: now.toLocaleTimeString("en-US", {
+          timeZone: "America/New_York",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        }),
+        india: now.toLocaleTimeString("en-US", {
+          timeZone: "Asia/Kolkata",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        }),
+        china: now.toLocaleTimeString("en-US", {
+          timeZone: "Asia/Shanghai",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        }),
+        russia: now.toLocaleTimeString("en-US", {
+          timeZone: "Europe/Moscow",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        }),
+      })
+    }
+
+    updateTimes()
+    const interval = setInterval(updateTimes, 1000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <div className="select-none text-black/90 font-Helvetica text-xs flex flex-row justify-between items-center">
-      <div className=" flex flex-col items-start">
-        <span className=" text-black/75 text-base font-semibold hover:underline cursor-pointer">
-          thedailycrimes@gmail.com
-        </span>
-        <div className=" text-sm flex flex-wrap gap-1">
-          <div className=" flex gap-0.5 hover:font-semibold cursor-pointer  items-center">
-            <FaTwitterSquare />
-            thedailycrimes
-          </div>
-          <div className=" flex gap-0.5 hover:font-semibold cursor-pointer  items-center">
-            <FaSquareFacebook />
-            dailycrimes
-          </div>
-          <div className=" flex gap-0.5 hover:font-semibold cursor-pointer  items-center">
-            <FaInstagramSquare />
-            daily_crimes
-          </div>
-          <div className=" flex gap-0.5 hover:font-semibold cursor-pointer  items-center">
-            <IoGlobeSharp />
-            thedailycrimes.com
-          </div>
+    <div className="select-none text-light-text dark:text-dark-text font-Helvetica text-xs flex flex-row justify-between items-center pb-2">
+      {/* Left - Edition info */}
+      <div className="flex flex-col items-start gap-1">
+        <div className="flex items-center gap-2">
+          <span className="badge badge-blue font-semibold">
+            INTELLIGENCE EDITION
+          </span>
+          <span className="text-light-muted dark:text-dark-muted">
+            Vol. I, No. 001
+          </span>
         </div>
-        <span>
-          PN-6, Thane - Belapur Rd, Digha Naka, Subhash Nagar, Dighe, Navi
-          Mumbai, Maharashtra 400708
-        </span>
+        <div className="flex items-center gap-1 text-light-muted dark:text-dark-muted hover:text-cognivue-blue dark:hover:text-cognivue-blue-light cursor-pointer transition-colors">
+          <IoGlobeSharp className="text-sm" />
+          <span>cognivue.ai</span>
+        </div>
       </div>
-      <div className=" flex flex-col items-end">
-        <span className=" text-black/75  font-semibold text-sm">
-          New Delhi, India
-        </span>
-        <span className=" text-black/80  font-semibold text-base">
-          {dayArr[day]}, {monthArr[month]} {todayDate}, {year}
-        </span>
-        <span className=" flex flex-row gap-1 font-sans font-semibold">
-          Local Time <Clock />
+
+      {/* Center - Global time zones */}
+      <div className="hidden md:flex items-center gap-4 font-mono text-xs">
+        <div className="flex flex-col items-center">
+          <span className="text-blue-600 font-semibold">{times.us}</span>
+          <span className="text-[10px] text-light-muted dark:text-dark-muted">
+            NYC
+          </span>
+        </div>
+        <div className="flex flex-col items-center">
+          <span className="text-orange-500 font-semibold">{times.india}</span>
+          <span className="text-[10px] text-light-muted dark:text-dark-muted">
+            DEL
+          </span>
+        </div>
+        <div className="flex flex-col items-center">
+          <span className="text-red-600 font-semibold">{times.china}</span>
+          <span className="text-[10px] text-light-muted dark:text-dark-muted">
+            BEI
+          </span>
+        </div>
+        <div className="flex flex-col items-center">
+          <span className="text-red-700 font-semibold">{times.russia}</span>
+          <span className="text-[10px] text-light-muted dark:text-dark-muted">
+            MOW
+          </span>
+        </div>
+      </div>
+
+      {/* Right - Date and theme toggle */}
+      <div className="flex flex-col items-end gap-1">
+        <div className="flex items-center gap-3">
+          <span className="text-light-muted dark:text-dark-muted font-semibold">
+            {dayArr[day]}, {monthArr[month]} {todayDate}, {year}
+          </span>
+          <ThemeToggle />
+        </div>
+        <span className="text-[10px] text-light-muted dark:text-dark-muted tracking-wider">
+          MULTI-REGIONAL GEOPOLITICAL ANALYSIS
         </span>
       </div>
     </div>
