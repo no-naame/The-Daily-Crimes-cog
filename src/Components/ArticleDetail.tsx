@@ -1,5 +1,6 @@
-import { IoArrowBack, IoTime, IoNewspaper, IoCheckmarkCircle } from "react-icons/io5"
+import { IoArrowBack } from "react-icons/io5"
 import RegionCard, { RegionData } from "./Region/RegionCard"
+import { SourcesList, Source } from "./SourceCitation"
 
 interface ArticleDetailProps {
   query: string
@@ -7,6 +8,22 @@ interface ArticleDetailProps {
   sourceCount: number
   onBack: () => void
 }
+
+// Sample sources data
+const sampleSources: Source[] = [
+  { id: 1, title: "Trump Administration Announces New Tariff Package", outlet: "The Wall Street Journal", region: "us", type: "independent" },
+  { id: 2, title: "Trade War Escalates as US Targets Chinese Tech", outlet: "The New York Times", region: "us", type: "independent" },
+  { id: 3, title: "Economic Impact of Tariffs on American Consumers", outlet: "Bloomberg", region: "us", type: "independent" },
+  { id: 4, title: "India Explores Supply Chain Opportunities", outlet: "The Economic Times", region: "india", type: "independent" },
+  { id: 5, title: "Make in India Gains Momentum Amid Trade War", outlet: "Hindustan Times", region: "india", type: "independent" },
+  { id: 6, title: "Non-Aligned Stance Benefits Indian Economy", outlet: "The Hindu", region: "india", type: "independent" },
+  { id: 7, title: "US Trade Aggression Violates International Law", outlet: "Global Times", region: "china", type: "state" },
+  { id: 8, title: "China's Technological Self-Reliance Accelerates", outlet: "Xinhua News", region: "china", type: "state" },
+  { id: 9, title: "American Consumers Bear Tariff Costs", outlet: "CGTN", region: "china", type: "state" },
+  { id: 10, title: "Trade War Signals Western Decline", outlet: "RT", region: "russia", type: "state" },
+  { id: 11, title: "De-Dollarization Accelerates Amid US-China Tensions", outlet: "TASS", region: "russia", type: "state" },
+  { id: 12, title: "BRICS Nations United Against Trade Warfare", outlet: "Sputnik", region: "russia", type: "state" },
+]
 
 // Sample data - in real app this would come from API
 const sampleRegions: RegionData[] = [
@@ -90,46 +107,41 @@ const ArticleDetail = ({ query, date, sourceCount, onBack }: ArticleDetailProps)
       {/* Back Button */}
       <button
         onClick={onBack}
-        className="btn btn-ghost mb-8 -ml-2"
+        className="btn btn-text mb-8 -ml-2 flex items-center gap-2"
       >
         <IoArrowBack className="w-4 h-4" />
         Back to Briefings
       </button>
 
-      {/* Header */}
-      <header className="mb-12 text-center">
-        <span className="section-header inline-block mb-4">Intelligence Briefing</span>
+      {/* Newspaper Header */}
+      <header className="mb-10">
+        <div className="rule-double mb-6"></div>
 
-        <h1 className="text-2xl md:text-4xl font-TimesNewRoman font-bold text-light-text dark:text-dark-text mb-4 max-w-3xl mx-auto leading-tight">
-          "{query}"
-        </h1>
+        <div className="text-center">
+          <span className="uppercase tracking-widest text-xs font-Helvetica font-semibold text-light-secondary dark:text-dark-secondary">
+            Intelligence Briefing
+          </span>
 
-        {/* Meta */}
-        <div className="flex flex-wrap items-center justify-center gap-4 text-sm font-Helvetica text-light-muted dark:text-dark-muted">
-          <span className="flex items-center gap-1.5">
-            <IoTime className="w-4 h-4" />
-            {date}
-          </span>
-          <span className="flex items-center gap-1.5">
-            <IoNewspaper className="w-4 h-4" />
-            {sourceCount} sources analyzed
-          </span>
-          <span className="flex items-center gap-1.5">
-            <IoCheckmarkCircle className="w-4 h-4 text-emerald-500" />
-            95% extraction rate
-          </span>
+          <h1 className="font-TimesNewRoman font-bold text-3xl md:text-4xl text-light-text dark:text-dark-text mt-3 mb-4 leading-tight">
+            {query}
+          </h1>
+
+          {/* Meta - newspaper dateline style */}
+          <div className="text-sm font-Helvetica text-light-muted dark:text-dark-muted">
+            {date} · {sourceCount} sources analyzed · 4 regions
+          </div>
         </div>
+
+        <div className="rule-double mt-6"></div>
       </header>
 
-      {/* Divider */}
-      <div className="divider-ornament">
-        <span>•</span>
-      </div>
-
       {/* Executive Summary */}
-      <section className="mb-12 max-w-3xl mx-auto">
-        <h2 className="section-header">Executive Summary</h2>
-        <p className="text-light-text dark:text-dark-text leading-relaxed">
+      <section className="mb-10 max-w-3xl mx-auto">
+        <div className="rule-thin mb-4"></div>
+        <h2 className="uppercase tracking-widest text-xs font-Helvetica font-semibold text-light-secondary dark:text-dark-secondary mb-3">
+          Executive Summary
+        </h2>
+        <p className="text-light-text dark:text-dark-text text-lg leading-relaxed">
           Analysis reveals significant narrative divergence between Western and Eastern media coverage.
           While US and Chinese media present opposing narratives, Indian and Russian coverage suggests
           emerging strategic opportunities that Western analysts may be overlooking. All sources confirm
@@ -137,85 +149,77 @@ const ArticleDetail = ({ query, date, sourceCount, onBack }: ArticleDetailProps)
         </p>
       </section>
 
-      {/* Divider */}
-      <div className="divider-ornament">
-        <span>•</span>
+      {/* Key Finding - Newspaper pull quote style */}
+      <div className="key-finding max-w-3xl mx-auto">
+        <div className="key-finding-label">Key Intelligence Finding</div>
+        <p className="key-finding-text">
+          "While US and Chinese media present diametrically opposed narratives, Indian and Russian
+          coverage reveals a potential strategic realignment that Western analysts may be missing."
+        </p>
       </div>
 
       {/* Regional Perspectives */}
-      <section className="mb-12">
-        <h2 className="section-header text-center mb-8">Regional Perspectives</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <section className="mb-10 mt-10">
+        <div className="section-title">
+          <div className="rule-thin mb-3"></div>
+          <h2>Regional Perspectives</h2>
+          <div className="rule-thin mt-3"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           {sampleRegions.map((region) => (
             <RegionCard key={region.region} data={region} />
           ))}
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="divider-ornament">
-        <span>•</span>
-      </div>
-
       {/* Cross-Regional Analysis */}
-      <section className="mb-12">
-        <h2 className="section-header text-center mb-8">Cross-Regional Analysis</h2>
+      <section className="mb-10">
+        <div className="section-title">
+          <div className="rule-thin mb-3"></div>
+          <h2>Cross-Regional Analysis</h2>
+          <div className="rule-thin mt-3"></div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           {/* Consensus */}
-          <div className="analysis-box analysis-box-consensus">
-            <h3 className="font-TimesNewRoman font-semibold text-lg text-light-text dark:text-dark-text mb-4 flex items-center gap-2">
-              <IoCheckmarkCircle className="text-emerald-500" />
+          <div className="analysis-box">
+            <h3 className="analysis-box-title">
+              <span className="text-emerald-600 dark:text-emerald-400">✓</span>
               Consensus Points
             </h3>
-            <p className="text-xs text-light-muted dark:text-dark-muted mb-3 font-Helvetica">
+            <p className="analysis-box-subtitle">
               Facts all four regions agree upon
             </p>
-            <ul className="space-y-2">
-              {consensusPoints.map((point, index) => (
-                <li key={index} className="text-sm text-light-text dark:text-dark-text flex items-start gap-2">
-                  <span className="text-emerald-500 mt-0.5">✓</span>
-                  {point}
-                </li>
-              ))}
-            </ul>
+            {consensusPoints.map((point, index) => (
+              <div key={index} className="analysis-box-item">
+                <span className="text-emerald-600 dark:text-emerald-400 flex-shrink-0">•</span>
+                <span>{point}</span>
+              </div>
+            ))}
           </div>
 
           {/* Divergence */}
-          <div className="analysis-box analysis-box-divergence">
-            <h3 className="font-TimesNewRoman font-semibold text-lg text-light-text dark:text-dark-text mb-4 flex items-center gap-2">
-              <span className="text-amber-500">⚡</span>
+          <div className="analysis-box">
+            <h3 className="analysis-box-title">
+              <span className="text-amber-600 dark:text-amber-400">⚡</span>
               Divergence Points
             </h3>
-            <p className="text-xs text-light-muted dark:text-dark-muted mb-3 font-Helvetica">
+            <p className="analysis-box-subtitle">
               Where regional narratives contradict
             </p>
-            <ul className="space-y-2">
-              {divergencePoints.map((point, index) => (
-                <li key={index} className="text-sm text-light-text dark:text-dark-text flex items-start gap-2">
-                  <span className="text-amber-500 mt-0.5">→</span>
-                  {point}
-                </li>
-              ))}
-            </ul>
+            {divergencePoints.map((point, index) => (
+              <div key={index} className="analysis-box-item">
+                <span className="text-amber-600 dark:text-amber-400 flex-shrink-0">→</span>
+                <span>{point}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Key Finding */}
-      <section className="mb-12 max-w-3xl mx-auto">
-        <div className="card bg-accent-navy/5 dark:bg-accent-blue/10 border-l-4 border-l-accent-navy dark:border-l-accent-blue">
-          <span className="text-xs font-Helvetica uppercase tracking-wider text-accent-navy dark:text-accent-blue font-semibold block mb-2">
-            Key Intelligence Finding
-          </span>
-          <p className="text-light-text dark:text-dark-text leading-relaxed italic">
-            "While US and Chinese media present diametrically opposed narratives, Indian and Russian
-            coverage reveals a potential strategic realignment that Western analysts may be missing.
-            The consensus on trade volume decline suggests measurable economic impact regardless of
-            narrative framing."
-          </p>
-        </div>
-      </section>
+      {/* Sources Section */}
+      <SourcesList sources={sampleSources} />
     </div>
   )
 }

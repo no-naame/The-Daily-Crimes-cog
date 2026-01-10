@@ -6,27 +6,31 @@ interface HeroProps {
 
 const Hero = ({ onQuerySubmit }: HeroProps) => {
   return (
-    <section className="text-center py-16 md:py-24">
-      {/* Masthead */}
-      <div className="mb-8">
-        <h1 className="font-OldLondon text-6xl md:text-8xl text-light-text dark:text-dark-text mb-4">
-          Cognivue
-        </h1>
-        <p className="text-lg md:text-xl font-TimesNewRoman text-light-secondary dark:text-dark-secondary">
-          Global Intelligence Briefing
-        </p>
-      </div>
+    <section className="masthead">
+      {/* Top rule */}
+      <div className="rule-double mb-6"></div>
+
+      {/* Masthead title - using COGNIVUE in caps to avoid v/b issue */}
+      <h1 className="masthead-title">COGNIVUE</h1>
+
+      {/* Subtitle */}
+      <p className="masthead-subtitle">Global Intelligence Briefing</p>
 
       {/* Tagline */}
-      <p className="text-base md:text-lg text-light-secondary dark:text-dark-secondary mb-12 max-w-xl mx-auto font-serif italic">
+      <p className="masthead-tagline">
         "See the world through every lens, not just one"
       </p>
 
+      {/* Bottom rule */}
+      <div className="rule-double mt-6 mb-8"></div>
+
       {/* Query Input */}
-      <QueryInput onSubmit={onQuerySubmit} />
+      <div className="max-w-2xl mx-auto">
+        <QueryInput onSubmit={onQuerySubmit} />
+      </div>
 
       {/* Region Indicators */}
-      <div className="flex items-center justify-center gap-6 mt-12 text-sm font-Helvetica text-light-muted dark:text-dark-muted">
+      <div className="flex items-center justify-center gap-8 mt-10 text-sm font-Helvetica text-light-secondary dark:text-dark-secondary">
         <span className="flex items-center gap-2">
           <span className="region-dot region-dot-us"></span>
           United States

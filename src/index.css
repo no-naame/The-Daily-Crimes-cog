@@ -16,6 +16,8 @@ body {
   @apply bg-light-bg text-light-text;
   @apply transition-colors duration-300 ease-in-out;
   font-family: "Georgia", "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.6;
 }
 
 .dark body {
@@ -24,11 +26,11 @@ body {
 
 /* Selection */
 ::selection {
-  @apply bg-accent-navy text-white;
+  @apply bg-light-text text-light-bg;
 }
 
 .dark ::selection {
-  @apply bg-accent-blue text-white;
+  @apply bg-dark-text text-dark-bg;
 }
 
 /* ===================================
@@ -78,12 +80,11 @@ body {
 }
 
 /* ===================================
-   SCROLLBAR (Minimal)
+   SCROLLBAR
    =================================== */
 
 ::-webkit-scrollbar {
   width: 8px;
-  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -91,19 +92,11 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-light-border rounded-full;
+  @apply bg-light-divider/30;
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  @apply bg-dark-border;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-light-secondary;
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  @apply bg-dark-secondary;
+  @apply bg-dark-divider;
 }
 
 /* ===================================
@@ -112,7 +105,7 @@ body {
 
 .screen {
   @apply bg-light-bg min-h-screen;
-  @apply max-w-6xl mx-auto px-6 md:px-12 py-8;
+  @apply max-w-5xl mx-auto px-6 md:px-8 py-6;
   @apply transition-colors duration-300;
 }
 
@@ -121,12 +114,13 @@ body {
 }
 
 /* ===================================
-   TYPOGRAPHY
+   TYPOGRAPHY - NEWSPAPER STYLE
    =================================== */
 
 h1, h2, h3, h4 {
   @apply font-TimesNewRoman text-light-text;
-  @apply leading-tight tracking-tight;
+  @apply leading-tight;
+  letter-spacing: -0.02em;
 }
 
 .dark h1, .dark h2, .dark h3, .dark h4 {
@@ -134,276 +128,496 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  @apply text-4xl md:text-5xl font-bold;
+  @apply text-3xl md:text-4xl font-bold;
 }
 
 h2 {
-  @apply text-2xl md:text-3xl font-semibold;
+  @apply text-2xl md:text-3xl font-bold;
 }
 
 h3 {
-  @apply text-xl md:text-2xl font-medium;
+  @apply text-xl md:text-2xl font-semibold;
 }
 
 p {
-  @apply leading-relaxed max-w-reading;
+  @apply leading-relaxed;
+  font-size: 1.05rem;
 }
 
 /* ===================================
-   NEWSPAPER ELEMENTS
+   NEWSPAPER RULES & LINES
    =================================== */
 
-/* Elegant divider with dot */
+/* Double rule - thick then thin */
+.rule-double {
+  @apply border-t-[3px] border-light-divider;
+  padding-bottom: 3px;
+  border-bottom: 1px solid;
+  @apply border-b-light-divider;
+}
+
+.dark .rule-double {
+  @apply border-t-dark-divider border-b-dark-divider;
+}
+
+/* Single thick rule */
+.rule-thick {
+  @apply border-t-2 border-light-divider;
+}
+
+.dark .rule-thick {
+  @apply border-t-dark-divider;
+}
+
+/* Single thin rule */
+.rule-thin {
+  @apply border-t border-light-divider;
+}
+
+.dark .rule-thin {
+  @apply border-t-dark-divider;
+}
+
+/* Section header with rules */
+.section-title {
+  @apply text-center py-4;
+}
+
+.section-title h2 {
+  @apply uppercase tracking-[0.2em] text-sm font-Helvetica font-semibold;
+  @apply text-light-text;
+}
+
+.dark .section-title h2 {
+  @apply text-dark-text;
+}
+
+/* Decorative ornament divider */
 .divider-ornament {
-  @apply flex items-center justify-center gap-4 my-8;
+  @apply flex items-center justify-center my-8;
 }
 
 .divider-ornament::before,
 .divider-ornament::after {
   content: "";
-  @apply flex-1 h-px bg-light-border;
+  @apply flex-1 h-px bg-light-divider;
 }
 
 .dark .divider-ornament::before,
 .dark .divider-ornament::after {
-  @apply bg-dark-border;
+  @apply bg-dark-divider;
 }
 
 .divider-ornament span {
-  @apply text-light-muted text-lg;
+  @apply px-4 text-light-muted text-sm;
 }
 
 .dark .divider-ornament span {
   @apply text-dark-muted;
 }
 
-/* Simple horizontal rule */
-.divider {
-  @apply border-t border-light-border my-6;
+/* ===================================
+   MASTHEAD
+   =================================== */
+
+.masthead {
+  @apply text-center py-8;
 }
 
-.dark .divider {
-  @apply border-dark-border;
+.masthead-title {
+  @apply font-OldLondon text-light-text;
+  font-size: clamp(3rem, 10vw, 5rem);
+  letter-spacing: 0.05em;
+  line-height: 1;
 }
 
-/* Section header with rule */
-.section-header {
+.dark .masthead-title {
+  @apply text-dark-text;
+}
+
+.masthead-subtitle {
+  @apply font-TimesNewRoman text-light-secondary;
+  @apply text-lg md:text-xl mt-2 tracking-wide;
+}
+
+.dark .masthead-subtitle {
+  @apply text-dark-secondary;
+}
+
+.masthead-tagline {
+  @apply font-serif italic text-light-secondary;
+  @apply text-base mt-4;
+}
+
+.dark .masthead-tagline {
+  @apply text-dark-secondary;
+}
+
+/* ===================================
+   NEWSPAPER ARTICLE CARD
+   =================================== */
+
+.article-card {
+  @apply bg-transparent p-0;
+  @apply border-t-2 border-light-divider;
+  @apply transition-colors duration-200;
+}
+
+.dark .article-card {
+  @apply border-t-dark-divider;
+}
+
+.article-card:hover {
+  @apply bg-light-surface/50;
+}
+
+.dark .article-card:hover {
+  @apply bg-dark-surface/50;
+}
+
+.article-card-inner {
+  @apply py-5 px-1;
+}
+
+.article-card-category {
   @apply uppercase tracking-widest text-xs font-Helvetica font-semibold;
-  @apply text-light-secondary mb-4 pb-2;
-  @apply border-b border-light-divider;
+  @apply text-light-secondary;
 }
 
-.dark .section-header {
-  @apply text-dark-secondary border-dark-divider;
+.dark .article-card-category {
+  @apply text-dark-secondary;
+}
+
+.article-card-date {
+  @apply text-light-muted text-xs font-Helvetica;
+}
+
+.dark .article-card-date {
+  @apply text-dark-muted;
+}
+
+.article-card-title {
+  @apply font-TimesNewRoman font-bold text-xl md:text-2xl;
+  @apply text-light-text leading-tight mt-2 mb-3;
+}
+
+.dark .article-card-title {
+  @apply text-dark-text;
+}
+
+.article-card-description {
+  @apply text-light-secondary text-base leading-relaxed;
+}
+
+.dark .article-card-description {
+  @apply text-dark-secondary;
+}
+
+.article-card-meta {
+  @apply mt-4 pt-3 border-t border-light-border;
+  @apply flex items-center justify-between;
+  @apply text-xs font-Helvetica text-light-muted;
+}
+
+.dark .article-card-meta {
+  @apply border-t-dark-border text-dark-muted;
+}
+
+.article-card-link {
+  @apply font-Helvetica font-medium text-sm;
+  @apply text-light-text hover:text-light-secondary;
+  @apply transition-colors duration-150;
+}
+
+.dark .article-card-link {
+  @apply text-dark-text hover:text-dark-secondary;
 }
 
 /* ===================================
-   CARDS
+   REGION COLUMN (Newspaper Style)
    =================================== */
 
-.card {
-  @apply bg-light-surface rounded-lg p-6;
-  @apply border border-light-border;
-  @apply shadow-card;
-  @apply transition-all duration-200 ease-out;
+.region-column {
+  @apply bg-transparent;
+  @apply border-l-2 border-light-divider pl-4;
 }
 
-.dark .card {
-  @apply bg-dark-surface border-dark-border;
-  @apply shadow-card-dark;
+.dark .region-column {
+  @apply border-l-dark-divider;
 }
 
-.card:hover {
-  @apply shadow-card-hover -translate-y-0.5;
-  @apply border-accent-navy/30;
+.region-column-header {
+  @apply flex items-center gap-2 mb-4;
 }
 
-.dark .card:hover {
-  @apply shadow-card-dark-hover;
-  @apply border-accent-blue/30;
+.region-column-flag {
+  @apply text-xl;
 }
 
-.card-interactive {
-  @apply cursor-pointer;
+.region-column-name {
+  @apply font-TimesNewRoman font-bold text-lg;
+  @apply text-light-text uppercase tracking-wide;
 }
 
-.card-interactive:active {
-  @apply scale-[0.99];
+.dark .region-column-name {
+  @apply text-dark-text;
+}
+
+.region-column-dateline {
+  @apply font-Helvetica text-xs uppercase tracking-wider;
+  @apply text-light-secondary mb-2;
+}
+
+.dark .region-column-dateline {
+  @apply text-dark-secondary;
+}
+
+.region-column-narrative {
+  @apply text-light-text text-base leading-relaxed mb-4;
+}
+
+.dark .region-column-narrative {
+  @apply text-dark-text;
+}
+
+.region-column-section {
+  @apply mt-4 pt-3 border-t border-light-border;
+}
+
+.dark .region-column-section {
+  @apply border-t-dark-border;
+}
+
+.region-column-section-title {
+  @apply uppercase tracking-widest text-xs font-Helvetica font-semibold;
+  @apply text-light-secondary mb-2;
+}
+
+.dark .region-column-section-title {
+  @apply text-dark-secondary;
+}
+
+.region-column-claim {
+  @apply text-light-text text-sm leading-relaxed mb-2;
+  @apply flex items-start gap-2;
+}
+
+.dark .region-column-claim {
+  @apply text-dark-text;
+}
+
+.region-column-claim::before {
+  content: "•";
+  @apply text-light-muted flex-shrink-0;
+}
+
+.dark .region-column-claim::before {
+  @apply text-dark-muted;
+}
+
+.region-column-sources {
+  @apply mt-4 pt-3 border-t border-light-border;
+  @apply text-xs font-Helvetica text-light-muted;
+  @apply flex items-center justify-between;
+}
+
+.dark .region-column-sources {
+  @apply border-t-dark-border text-dark-muted;
 }
 
 /* ===================================
-   REGION CARDS
+   ANALYSIS BOX (Newspaper Editorial)
    =================================== */
 
-.region-card {
-  @apply card p-5;
-  @apply border-t-4;
+.analysis-box {
+  @apply bg-transparent p-0 py-4;
+  @apply border-t-2 border-light-divider;
 }
 
-.region-card-us {
-  @apply border-t-region-us;
+.dark .analysis-box {
+  @apply border-t-dark-divider;
 }
 
-.region-card-india {
-  @apply border-t-region-india;
+.analysis-box-title {
+  @apply font-TimesNewRoman font-bold text-xl;
+  @apply text-light-text mb-2 flex items-center gap-2;
 }
 
-.region-card-china {
-  @apply border-t-region-china;
+.dark .analysis-box-title {
+  @apply text-dark-text;
 }
 
-.region-card-russia {
-  @apply border-t-region-russia;
+.analysis-box-subtitle {
+  @apply text-xs font-Helvetica text-light-muted mb-3;
+}
+
+.dark .analysis-box-subtitle {
+  @apply text-dark-muted;
+}
+
+.analysis-box-item {
+  @apply text-light-text text-base leading-relaxed mb-2;
+  @apply flex items-start gap-2;
+}
+
+.dark .analysis-box-item {
+  @apply text-dark-text;
 }
 
 /* ===================================
-   BUTTONS
+   SOURCE CITATIONS
+   =================================== */
+
+.source-citation {
+  @apply inline-flex items-center justify-center;
+  @apply w-4 h-4 text-[10px] font-Helvetica font-bold;
+  @apply bg-light-border text-light-secondary;
+  @apply rounded-sm cursor-pointer;
+  @apply hover:bg-accent-navy hover:text-white;
+  @apply transition-colors duration-150;
+  vertical-align: super;
+  margin-left: 1px;
+}
+
+.dark .source-citation {
+  @apply bg-dark-border text-dark-secondary;
+  @apply hover:bg-accent-blue hover:text-white;
+}
+
+.sources-section {
+  @apply mt-12 pt-6 border-t-2 border-light-divider;
+}
+
+.dark .sources-section {
+  @apply border-t-dark-divider;
+}
+
+.sources-section-title {
+  @apply uppercase tracking-widest text-xs font-Helvetica font-semibold;
+  @apply text-light-secondary mb-4;
+}
+
+.dark .sources-section-title {
+  @apply text-dark-secondary;
+}
+
+.sources-region {
+  @apply mb-4;
+}
+
+.sources-region-title {
+  @apply font-Helvetica font-semibold text-sm;
+  @apply text-light-text mb-2;
+}
+
+.dark .sources-region-title {
+  @apply text-dark-text;
+}
+
+.sources-list {
+  @apply space-y-1;
+}
+
+.source-item {
+  @apply text-sm text-light-secondary;
+  @apply flex items-start gap-2;
+}
+
+.dark .source-item {
+  @apply text-dark-secondary;
+}
+
+.source-item-number {
+  @apply font-Helvetica font-bold text-light-muted;
+  @apply w-5 flex-shrink-0;
+}
+
+.dark .source-item-number {
+  @apply text-dark-muted;
+}
+
+/* ===================================
+   KEY FINDING BOX
+   =================================== */
+
+.key-finding {
+  @apply my-8 py-6 px-6;
+  @apply border-t-2 border-b-2 border-light-divider;
+  @apply bg-light-surface/30;
+}
+
+.dark .key-finding {
+  @apply border-t-dark-divider border-b-dark-divider;
+  @apply bg-dark-surface/30;
+}
+
+.key-finding-label {
+  @apply uppercase tracking-widest text-xs font-Helvetica font-semibold;
+  @apply text-light-secondary mb-3;
+}
+
+.dark .key-finding-label {
+  @apply text-dark-secondary;
+}
+
+.key-finding-text {
+  @apply font-serif italic text-lg text-light-text leading-relaxed;
+}
+
+.dark .key-finding-text {
+  @apply text-dark-text;
+}
+
+/* ===================================
+   BUTTONS & INPUTS
    =================================== */
 
 .btn {
   @apply inline-flex items-center justify-center gap-2;
-  @apply px-4 py-2.5 rounded-lg font-Helvetica font-medium text-sm;
+  @apply px-4 py-2 font-Helvetica font-medium text-sm;
   @apply transition-all duration-150 ease-out;
-  @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+  @apply focus:outline-none;
 }
 
-.btn-primary {
-  @apply bg-accent-navy text-white;
-  @apply hover:bg-accent-navy-light;
-  @apply focus:ring-accent-navy;
+.btn-text {
+  @apply text-light-text hover:text-light-secondary;
 }
 
-.dark .btn-primary {
-  @apply bg-accent-blue text-white;
-  @apply hover:bg-accent-blue/90;
-  @apply focus:ring-accent-blue;
+.dark .btn-text {
+  @apply text-dark-text hover:text-dark-secondary;
 }
-
-.btn-secondary {
-  @apply bg-light-surface text-light-text border border-light-border;
-  @apply hover:bg-light-border/20;
-  @apply focus:ring-accent-navy;
-}
-
-.dark .btn-secondary {
-  @apply bg-dark-surface text-dark-text border-dark-border;
-  @apply hover:bg-dark-border/50;
-  @apply focus:ring-accent-blue;
-}
-
-.btn-ghost {
-  @apply text-light-secondary hover:text-light-text;
-  @apply hover:bg-light-border/20;
-}
-
-.dark .btn-ghost {
-  @apply text-dark-secondary hover:text-dark-text;
-  @apply hover:bg-dark-border/50;
-}
-
-/* ===================================
-   INPUTS
-   =================================== */
 
 .input {
-  @apply w-full px-4 py-3 rounded-lg;
-  @apply bg-light-surface border border-light-border;
+  @apply w-full px-4 py-3;
+  @apply bg-light-surface border-2 border-light-divider;
   @apply text-light-text placeholder:text-light-muted;
   @apply font-Helvetica text-base;
   @apply transition-all duration-150;
-  @apply focus:outline-none focus:border-accent-navy focus:ring-2 focus:ring-accent-navy/20;
+  @apply focus:outline-none focus:border-light-text;
 }
 
 .dark .input {
-  @apply bg-dark-surface border-dark-border;
+  @apply bg-dark-surface border-dark-divider;
   @apply text-dark-text placeholder:text-dark-muted;
-  @apply focus:border-accent-blue focus:ring-accent-blue/20;
+  @apply focus:border-dark-text;
 }
 
 /* ===================================
-   BADGES / CHIPS
+   CHIPS
    =================================== */
 
-.badge {
-  @apply inline-flex items-center gap-1.5;
-  @apply px-2.5 py-1 rounded-full;
-  @apply text-xs font-Helvetica font-medium;
-}
-
-.badge-default {
-  @apply bg-light-border/50 text-light-secondary;
-}
-
-.dark .badge-default {
-  @apply bg-dark-border text-dark-secondary;
-}
-
-.badge-accent {
-  @apply bg-accent-navy/10 text-accent-navy;
-}
-
-.dark .badge-accent {
-  @apply bg-accent-blue/20 text-accent-blue;
-}
-
 .chip {
-  @apply inline-flex items-center gap-1;
-  @apply px-3 py-1.5 rounded-full;
+  @apply inline-flex items-center;
+  @apply px-3 py-1.5;
   @apply text-sm font-Helvetica;
-  @apply bg-light-border/30 text-light-secondary;
-  @apply hover:bg-light-border/50 cursor-pointer;
-  @apply transition-colors duration-150;
+  @apply border border-light-divider text-light-secondary;
+  @apply hover:bg-light-text hover:text-light-bg hover:border-light-text;
+  @apply cursor-pointer transition-all duration-150;
 }
 
 .dark .chip {
-  @apply bg-dark-border/50 text-dark-secondary;
-  @apply hover:bg-dark-border;
-}
-
-/* ===================================
-   ANALYSIS BOXES
-   =================================== */
-
-.analysis-box {
-  @apply card p-5;
-  @apply border-l-4;
-}
-
-.analysis-box-consensus {
-  @apply border-l-emerald-500;
-}
-
-.analysis-box-divergence {
-  @apply border-l-amber-500;
-}
-
-/* ===================================
-   LINKS
-   =================================== */
-
-.link {
-  @apply text-accent-navy font-medium;
-  @apply hover:text-accent-navy-light;
-  @apply transition-colors duration-150;
-  @apply underline underline-offset-2 decoration-accent-navy/30;
-  @apply hover:decoration-accent-navy;
-}
-
-.dark .link {
-  @apply text-accent-blue;
-  @apply hover:text-accent-sage;
-  @apply decoration-accent-blue/30;
-  @apply hover:decoration-accent-blue;
-}
-
-.link-subtle {
-  @apply text-light-secondary no-underline;
-  @apply hover:text-light-text;
-}
-
-.dark .link-subtle {
-  @apply text-dark-secondary;
-  @apply hover:text-dark-text;
+  @apply border-dark-divider text-dark-secondary;
+  @apply hover:bg-dark-text hover:text-dark-bg hover:border-dark-text;
 }
 
 /* ===================================
@@ -411,35 +625,29 @@ p {
    =================================== */
 
 .theme-toggle {
-  @apply p-2 rounded-lg;
+  @apply p-2;
   @apply text-light-secondary hover:text-light-text;
-  @apply hover:bg-light-border/30;
-  @apply transition-all duration-200;
+  @apply transition-colors duration-200;
 }
 
 .dark .theme-toggle {
   @apply text-dark-secondary hover:text-dark-text;
-  @apply hover:bg-dark-border/50;
 }
 
 .theme-toggle svg {
   @apply w-5 h-5;
-  @apply transition-transform duration-300;
-}
-
-.theme-toggle:hover svg {
-  @apply rotate-12;
 }
 
 /* ===================================
-   STAGGER ANIMATIONS
+   ANIMATIONS
    =================================== */
 
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.15s; }
-.stagger-3 { animation-delay: 0.2s; }
-.stagger-4 { animation-delay: 0.25s; }
-.stagger-5 { animation-delay: 0.3s; }
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
 
 /* ===================================
    UTILITIES
@@ -447,10 +655,6 @@ p {
 
 .text-balance {
   text-wrap: balance;
-}
-
-.max-w-reading {
-  max-width: 65ch;
 }
 
 /* Region indicator dots */
@@ -463,34 +667,35 @@ p {
 .region-dot-china { @apply bg-region-china; }
 .region-dot-russia { @apply bg-region-russia; }
 
-/* Focus visible for accessibility */
-.focus-ring {
-  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-navy focus-visible:ring-offset-2;
-}
-
-.dark .focus-ring {
-  @apply focus-visible:ring-accent-blue;
-}
-
 /* Prevent image dragging */
 img {
   @apply select-none pointer-events-none;
 }
 
+/* Link subtle */
+.link-subtle {
+  @apply text-light-secondary hover:text-light-text;
+  @apply transition-colors duration-150;
+}
+
+.dark .link-subtle {
+  @apply text-dark-secondary hover:text-dark-text;
+}
+
 /* ===================================
-   RESPONSIVE UTILITIES
+   RESPONSIVE
    =================================== */
 
 @media (max-width: 768px) {
   .screen {
-    @apply px-4 py-6;
+    @apply px-4 py-4;
   }
 
-  h1 {
-    @apply text-3xl;
+  body {
+    font-size: 16px;
   }
 
-  h2 {
-    @apply text-xl;
+  .masthead-title {
+    font-size: 2.5rem;
   }
 }
