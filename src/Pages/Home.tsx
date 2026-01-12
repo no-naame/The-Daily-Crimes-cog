@@ -121,6 +121,9 @@ const Home = () => {
     )
   }
 
+  // Split articles: featured (first) and rest
+  const [featuredArticle, ...otherArticles] = sampleArticles
+
   // Landing page
   return (
     <Screen>
@@ -129,24 +132,34 @@ const Home = () => {
       {/* Hero Section */}
       <Hero onQuerySubmit={handleQuerySubmit} />
 
-      {/* Divider */}
-      <div className="divider-ornament">
-        <span>•</span>
-      </div>
-
       {/* Recent Briefings Section */}
-      <section className="mb-12">
-        <h2 className="section-header text-center mb-8">Recent Intelligence Briefings</h2>
+      <section className="py-12">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <div className="rule-thin max-w-xs mx-auto mb-4"></div>
+          <h2 className="font-TimesNewRoman text-2xl md:text-3xl text-light-text dark:text-dark-text">
+            Recent Briefings
+          </h2>
+          <div className="rule-thin max-w-xs mx-auto mt-4"></div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {sampleArticles.map((article, index) => (
-            <div
+        {/* Featured Article */}
+        <div className="mb-12 max-w-2xl mx-auto">
+          <ArticleCard
+            article={featuredArticle}
+            onClick={handleArticleClick}
+            variant="featured"
+          />
+        </div>
+
+        {/* Other Articles - Clean Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {otherArticles.map((article) => (
+            <ArticleCard
               key={article.id}
-              className={`animate-fade-in-up stagger-${Math.min(index + 1, 5)}`}
-              style={{ opacity: 0 }}
-            >
-              <ArticleCard article={article} onClick={handleArticleClick} />
-            </div>
+              article={article}
+              onClick={handleArticleClick}
+            />
           ))}
         </div>
       </section>
