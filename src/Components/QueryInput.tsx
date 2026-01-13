@@ -32,8 +32,8 @@ const QueryInput = ({ onSubmit }: QueryInputProps) => {
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      {/* Label */}
-      <label className="block text-sm font-Helvetica text-light-secondary dark:text-dark-secondary mb-3 text-center">
+      {/* Label - Main focus */}
+      <label className="block text-xl md:text-2xl font-TimesNewRoman text-light-text dark:text-dark-text mb-6 text-center leading-relaxed">
         What geopolitical topic would you like to analyze?
       </label>
 
@@ -41,12 +41,12 @@ const QueryInput = ({ onSubmit }: QueryInputProps) => {
       <form onSubmit={handleSubmit} className="relative">
         <div
           className={`
-            flex items-center gap-3 bg-light-surface dark:bg-dark-surface
-            border rounded-xl px-4 py-3
-            transition-all duration-200
+            flex items-center gap-4 bg-light-surface dark:bg-dark-surface
+            border-2 rounded-2xl px-5 py-4
+            transition-all duration-200 shadow-sm
             ${
               isFocused
-                ? "border-accent-navy dark:border-accent-blue ring-2 ring-accent-navy/10 dark:ring-accent-blue/10"
+                ? "border-light-text dark:border-dark-text shadow-md"
                 : "border-light-border dark:border-dark-border"
             }
           `}
@@ -60,17 +60,17 @@ const QueryInput = ({ onSubmit }: QueryInputProps) => {
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             placeholder='e.g., "US-China semiconductor restrictions"'
-            className="flex-1 bg-transparent outline-none text-light-text dark:text-dark-text placeholder:text-light-muted dark:placeholder:text-dark-muted font-Helvetica"
+            className="flex-1 bg-transparent outline-none text-light-text dark:text-dark-text placeholder:text-light-muted dark:placeholder:text-dark-muted font-Helvetica text-base"
           />
 
           <button
             type="submit"
             disabled={!query.trim()}
             className={`
-              p-2 rounded-lg transition-all duration-150
+              p-2.5 rounded-xl transition-all duration-150
               ${
                 query.trim()
-                  ? "bg-accent-navy dark:bg-accent-blue text-white hover:bg-accent-navy-light dark:hover:bg-accent-blue/90"
+                  ? "bg-light-text dark:bg-dark-text text-light-bg dark:text-dark-bg hover:opacity-80"
                   : "bg-light-border dark:bg-dark-border text-light-muted dark:text-dark-muted cursor-not-allowed"
               }
             `}
@@ -81,15 +81,15 @@ const QueryInput = ({ onSubmit }: QueryInputProps) => {
       </form>
 
       {/* Suggestions */}
-      <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
-        <span className="text-xs text-light-muted dark:text-dark-muted font-Helvetica">
+      <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
+        <span className="text-sm text-light-muted dark:text-dark-muted font-Helvetica">
           Try:
         </span>
         {suggestions.map((suggestion) => (
           <button
             key={suggestion}
             onClick={() => handleSuggestionClick(suggestion)}
-            className="chip"
+            className="px-4 py-2 text-sm font-Helvetica text-light-secondary dark:text-dark-secondary border border-light-border dark:border-dark-border rounded-full hover:border-light-text dark:hover:border-dark-text hover:text-light-text dark:hover:text-dark-text transition-colors"
           >
             {suggestion}
           </button>

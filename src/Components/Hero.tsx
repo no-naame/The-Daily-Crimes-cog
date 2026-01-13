@@ -74,40 +74,30 @@ const Hero = ({ onQuerySubmit }: HeroProps) => {
         </span>
       </div>
 
-      {/* Main Masthead */}
-      <div className="text-center">
-        {/* Top Rule */}
-        <div className="rule-double mb-4"></div>
+      {/* Compact Masthead */}
+      <div className="text-center mb-8">
+        <div className="rule-thin mb-3"></div>
 
-        {/* Date Line */}
-        <p className="text-xs font-Helvetica uppercase tracking-[0.3em] text-light-secondary dark:text-dark-secondary mb-4">
-          {date}
-        </p>
+        {/* Brand line with date */}
+        <div className="flex items-center justify-center gap-4 text-xs font-Helvetica uppercase tracking-[0.2em] text-light-muted dark:text-dark-muted">
+          <span>{date}</span>
+        </div>
 
-        {/* Main Title */}
-        <h1 className="font-OldLondon text-6xl md:text-8xl lg:text-9xl text-light-text dark:text-dark-text leading-none tracking-wide">
+        {/* Title - Smaller, not dominant */}
+        <h1 className="font-OldLondon text-3xl md:text-4xl text-light-text dark:text-dark-text mt-2 tracking-wide">
           COGNIVUE
         </h1>
 
         {/* Subtitle */}
-        <p className="font-TimesNewRoman text-lg md:text-xl text-light-secondary dark:text-dark-secondary mt-3 italic">
+        <p className="font-Helvetica text-xs uppercase tracking-[0.15em] text-light-muted dark:text-dark-muted mt-1">
           Global Intelligence Briefing
         </p>
 
-        {/* Tagline */}
-        <p className="text-xs font-Helvetica uppercase tracking-[0.2em] text-light-muted dark:text-dark-muted mt-2">
-          See the world through every lens, not just one
-        </p>
-
-        {/* Bottom Rule */}
-        <div className="rule-double mt-4 mb-12"></div>
+        <div className="rule-thin mt-3"></div>
       </div>
 
-      {/* Query Input - Clean and spacious */}
-      <div className="max-w-xl mx-auto">
-        <p className="text-center text-sm font-Helvetica text-light-secondary dark:text-dark-secondary mb-4">
-          What geopolitical topic would you like to analyze?
-        </p>
+      {/* Query Input - THE MAIN FOCUS */}
+      <div className="max-w-2xl mx-auto">
         <QueryInput onSubmit={onQuerySubmit} />
       </div>
     </section>
