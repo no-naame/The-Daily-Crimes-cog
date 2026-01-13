@@ -107,38 +107,36 @@ const ArticleDetail = ({ query, date, sourceCount, onBack }: ArticleDetailProps)
       {/* Back Button */}
       <button
         onClick={onBack}
-        className="btn btn-text mb-8 -ml-2 flex items-center gap-2"
+        className="flex items-center gap-2 text-sm font-Helvetica text-light-muted dark:text-dark-muted hover:text-light-text dark:hover:text-dark-text transition-colors mb-8"
       >
         <IoArrowBack className="w-4 h-4" />
         Back to Briefings
       </button>
 
-      {/* Newspaper Header */}
-      <header className="mb-10">
-        <div className="rule-double mb-6"></div>
-
-        <div className="text-center">
-          <span className="uppercase tracking-widest text-xs font-Helvetica font-semibold text-light-secondary dark:text-dark-secondary">
+      {/* Header */}
+      <header className="mb-12">
+        <div className="border-t-2 border-b border-light-divider dark:border-dark-divider py-6">
+          <span className="uppercase tracking-[0.2em] text-xs font-Helvetica font-medium text-light-muted dark:text-dark-muted">
             Intelligence Briefing
           </span>
 
-          <h1 className="font-TimesNewRoman font-bold text-3xl md:text-4xl text-light-text dark:text-dark-text mt-3 mb-4 leading-tight">
+          <h1 className="font-TimesNewRoman font-bold text-3xl md:text-4xl text-light-text dark:text-dark-text mt-3 leading-tight">
             {query}
           </h1>
 
-          {/* Meta - newspaper dateline style */}
-          <div className="text-sm font-Helvetica text-light-muted dark:text-dark-muted">
-            {date} · {sourceCount} sources analyzed · 4 regions
+          <div className="flex items-center gap-3 mt-4 text-sm font-Helvetica text-light-muted dark:text-dark-muted">
+            <span>{date}</span>
+            <span>·</span>
+            <span>{sourceCount} sources</span>
+            <span>·</span>
+            <span>4 regions</span>
           </div>
         </div>
-
-        <div className="rule-double mt-6"></div>
       </header>
 
       {/* Executive Summary */}
-      <section className="mb-10 max-w-3xl mx-auto">
-        <div className="rule-thin mb-4"></div>
-        <h2 className="uppercase tracking-widest text-xs font-Helvetica font-semibold text-light-secondary dark:text-dark-secondary mb-3">
+      <section className="mb-12 max-w-3xl">
+        <h2 className="text-xs font-Helvetica font-semibold uppercase tracking-wider text-light-muted dark:text-dark-muted mb-4">
           Executive Summary
         </h2>
         <p className="text-light-text dark:text-dark-text text-lg leading-relaxed">
@@ -149,24 +147,28 @@ const ArticleDetail = ({ query, date, sourceCount, onBack }: ArticleDetailProps)
         </p>
       </section>
 
-      {/* Key Finding - Newspaper pull quote style */}
-      <div className="key-finding max-w-3xl mx-auto">
-        <div className="key-finding-label">Key Intelligence Finding</div>
-        <p className="key-finding-text">
-          "While US and Chinese media present diametrically opposed narratives, Indian and Russian
-          coverage reveals a potential strategic realignment that Western analysts may be missing."
-        </p>
-      </div>
+      {/* Key Finding */}
+      <section className="mb-12 max-w-3xl">
+        <div className="border-l-4 border-light-text dark:border-dark-text pl-6 py-2">
+          <span className="text-xs font-Helvetica font-semibold uppercase tracking-wider text-light-muted dark:text-dark-muted block mb-2">
+            Key Intelligence Finding
+          </span>
+          <p className="font-TimesNewRoman italic text-xl text-light-text dark:text-dark-text leading-relaxed">
+            "While US and Chinese media present diametrically opposed narratives, Indian and Russian
+            coverage reveals a potential strategic realignment that Western analysts may be missing."
+          </p>
+        </div>
+      </section>
 
       {/* Regional Perspectives */}
-      <section className="mb-10 mt-10">
-        <div className="section-title">
-          <div className="rule-thin mb-3"></div>
-          <h2>Regional Perspectives</h2>
-          <div className="rule-thin mt-3"></div>
+      <section className="mb-12">
+        <div className="border-t-2 border-light-divider dark:border-dark-divider pt-6 mb-8">
+          <h2 className="text-xs font-Helvetica font-semibold uppercase tracking-[0.2em] text-light-text dark:text-dark-text">
+            Regional Perspectives
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {sampleRegions.map((region) => (
             <RegionCard key={region.region} data={region} />
           ))}
@@ -174,46 +176,70 @@ const ArticleDetail = ({ query, date, sourceCount, onBack }: ArticleDetailProps)
       </section>
 
       {/* Cross-Regional Analysis */}
-      <section className="mb-10">
-        <div className="section-title">
-          <div className="rule-thin mb-3"></div>
-          <h2>Cross-Regional Analysis</h2>
-          <div className="rule-thin mt-3"></div>
+      <section className="mb-12">
+        <div className="border-t-2 border-light-divider dark:border-dark-divider pt-6 mb-8">
+          <h2 className="text-xs font-Helvetica font-semibold uppercase tracking-[0.2em] text-light-text dark:text-dark-text">
+            Cross-Regional Analysis
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Consensus */}
-          <div className="analysis-box">
-            <h3 className="analysis-box-title">
-              <span className="text-emerald-600 dark:text-emerald-400">✓</span>
-              Consensus Points
-            </h3>
-            <p className="analysis-box-subtitle">
-              Facts all four regions agree upon
-            </p>
-            {consensusPoints.map((point, index) => (
-              <div key={index} className="analysis-box-item">
-                <span className="text-emerald-600 dark:text-emerald-400 flex-shrink-0">•</span>
-                <span>{point}</span>
+          <div className="bg-emerald-50 dark:bg-emerald-950/20 rounded-sm p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
+                <span className="text-emerald-600 dark:text-emerald-400 text-sm font-bold">C</span>
               </div>
-            ))}
+              <div>
+                <h3 className="font-TimesNewRoman font-bold text-lg text-light-text dark:text-dark-text">
+                  Consensus Points
+                </h3>
+                <p className="text-xs font-Helvetica text-light-muted dark:text-dark-muted">
+                  Facts all four regions agree upon
+                </p>
+              </div>
+            </div>
+            <ul className="space-y-3">
+              {consensusPoints.map((point, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <span className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-emerald-600 dark:text-emerald-400 text-xs font-bold">{index + 1}</span>
+                  </span>
+                  <span className="text-light-text dark:text-dark-text text-sm leading-relaxed">
+                    {point}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Divergence */}
-          <div className="analysis-box">
-            <h3 className="analysis-box-title">
-              <span className="text-amber-600 dark:text-amber-400">⚡</span>
-              Divergence Points
-            </h3>
-            <p className="analysis-box-subtitle">
-              Where regional narratives contradict
-            </p>
-            {divergencePoints.map((point, index) => (
-              <div key={index} className="analysis-box-item">
-                <span className="text-amber-600 dark:text-amber-400 flex-shrink-0">→</span>
-                <span>{point}</span>
+          <div className="bg-amber-50 dark:bg-amber-950/20 rounded-sm p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-8 rounded-full bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center">
+                <span className="text-amber-600 dark:text-amber-400 text-sm font-bold">D</span>
               </div>
-            ))}
+              <div>
+                <h3 className="font-TimesNewRoman font-bold text-lg text-light-text dark:text-dark-text">
+                  Divergence Points
+                </h3>
+                <p className="text-xs font-Helvetica text-light-muted dark:text-dark-muted">
+                  Where regional narratives contradict
+                </p>
+              </div>
+            </div>
+            <ul className="space-y-3">
+              {divergencePoints.map((point, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <span className="w-5 h-5 rounded-full bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-amber-600 dark:text-amber-400 text-xs font-bold">{index + 1}</span>
+                  </span>
+                  <span className="text-light-text dark:text-dark-text text-sm leading-relaxed">
+                    {point}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
